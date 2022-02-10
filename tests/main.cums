@@ -1,0 +1,8 @@
+push a
+push 10
+push b
+push a
+outc
+outc
+outc
+outc

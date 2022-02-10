@@ -1,0 +1,112 @@
+push 0
+
+push 1
+plus
+
+dup
+dup
+dup
+outi
+mul
+outi
+
+
+push 1
+plus
+
+dup
+dup
+dup
+outi
+mul
+outi
+
+
+push 1
+plus
+
+dup
+dup
+dup
+outi
+mul
+outi
+
+
+push 1
+plus
+
+dup
+dup
+dup
+outi
+mul
+outi
+
+
+push 1
+plus
+
+dup
+dup
+dup
+outi
+mul
+outi
+
+
+push 1
+plus
+
+dup
+dup
+dup
+outi
+mul
+outi
+
+
+push 1
+plus
+
+dup
+dup
+dup
+outi
+mul
+outi
+
+
+push 1
+plus
+
+dup
+dup
+dup
+outi
+mul
+outi
+
+
+push 1
+plus
+
+dup
+dup
+dup
+outi
+mul
+outi
+
+
+push 1
+plus
+
+dup
+dup
+dup
+outi
+mul
+outi
+pop
+
