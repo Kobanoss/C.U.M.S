@@ -5,7 +5,7 @@
 
 #### OP_PUSH_INT (push)
 
-	Adding integer value to top of the stack
+	Adding integer value to top of the stack.
 - Args:
 	
 		Integer
@@ -14,7 +14,10 @@
 		None
 - Output: 
 	
-		None		
+		None
+- Error:
+
+		None
 Example:
 	
 	push 5
@@ -23,7 +26,7 @@ Example:
 ---
 #### OP_DROP (drop) 
 
-	Removing integer value from top of the stack
+	Removing integer value from top of the stack.
 		
 - Args:
 	
@@ -33,7 +36,11 @@ Example:
 		None
 - Output: 
 	
-		None		
+		None
+
+- Error:
+
+		Throw UnderFlowError if drop called in empty stack.
 Example:
 	
 	push 5
