@@ -18,8 +18,7 @@
 	
 		None
 		
----
-	Example:
+Example:
 	
 	push 5
 
