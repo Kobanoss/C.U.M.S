@@ -3,7 +3,7 @@
 
 ### BASE OPERATIONS LIST
 
-	#### OP_PUSH_INT (push)
+	- OP_PUSH_INT (push)
 	
 	Desc: 
 		Adding integer value to top of the stack
@@ -22,7 +22,7 @@
 
 ---
 
-	#### OP_DROP (drop) 
+	- OP_DROP (drop) 
 	
 	Desc:
 		Removing integer value from top of the stack
