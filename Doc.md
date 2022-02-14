@@ -1,10 +1,5 @@
 # DOCUMENTATION FOR C.U.M.S.
 
-## C :: Common
-## U :: Universal
-## M :: Matchable
-## S :: Stack-based
-
 
 ### BASE OPERATIONS LIST
 
