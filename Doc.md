@@ -36,7 +36,8 @@ Example:
 		None		
 Example:
 	
-	pop
+	push 5
+	drop 
 ---
 
 
