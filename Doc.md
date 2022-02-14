@@ -3,7 +3,7 @@
 
 ## BASE OPERATIONS LIST
 
-#### `OP_PUSH_INT` :: `push`
+#### `OP_PUSH_INT` -> `push`
 
 	Add integer value to top of the stack.
 - Args:
@@ -25,7 +25,7 @@ Example:
 
 
 ---
-#### `OP_DROP` :: `drop`
+#### `OP_DROP` -> `drop`
 
 	Removing integer value from top of the stack.
 		
