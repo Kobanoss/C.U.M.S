@@ -20,7 +20,8 @@
 		Throw TypeError if value is not integer.
 Example:
 	
-	push 5 // Add 5 to top of the stack
+	// Add 5 to top of the stack
+	push 5 
 
 
 ---
@@ -43,8 +44,10 @@ Example:
 		Throw UnderFlowError if `drop` called in empty stack.
 Example:
 	
-	push 5 	// Add 5 to top of the stack
-	drop 	// Remove 5 from top of the stack
+	// Add 5 to top of the stack
+	push 5 	
+	// Remove 5 from top of the stack
+	drop 	
 ---
 
 
