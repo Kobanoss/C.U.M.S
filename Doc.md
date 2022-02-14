@@ -8,7 +8,8 @@ Desc:
 	Adding integer value to top of the stack
 
 Arguments:
-/n/tInteger value
+
+	Integer value
 Input: 
 	None
 Output: 
