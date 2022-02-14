@@ -5,8 +5,8 @@
 
 #### OP_PUSH_INT (push)
 	
-- Desc: 
-	- Adding integer value to top of the stack
+##### Desc: 
+	Adding integer value to top of the stack
 			
 - Args:
 	- Integer
@@ -17,8 +17,8 @@
 - Output: 
 	- None
 		
-- Example:
-	- push 5
+##### Example:
+	push 5
 
 
 #### OP_DROP (drop) 
