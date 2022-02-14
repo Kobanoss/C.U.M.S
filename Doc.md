@@ -5,6 +5,8 @@
 
 #### OP_PUSH_INT (push)
 
+	Adding integer value to top of the stack
+---
 - Args:
 	
 		Integer
@@ -17,9 +19,6 @@
 	
 		None
 		
----
-	
-	Adding integer value to top of the stack
 ---
 	Example:
 	
