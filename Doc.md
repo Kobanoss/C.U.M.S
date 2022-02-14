@@ -8,6 +8,8 @@
 	Desc:
 		Adding integer value to top of the stack
 	
+---
+	
 	Example:
 		push 5
 			
@@ -23,9 +25,6 @@
 	
 		None
 		
-""" test """
-''' test '''		
-
 
 
 #### OP_DROP (drop) 
