@@ -13,8 +13,8 @@
 	
 		None
 - Output: 
-	
-		None
+		
+		New element on top of the stack.
 - Error:
 
 		Throw TypeError if pushing value is not integer.
