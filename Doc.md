@@ -7,7 +7,6 @@
 ---
 
 	Adding integer value to top of the stack
----
 - Args:
 	
 		Integer
