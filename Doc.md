@@ -3,20 +3,20 @@
 
 ### BASE OPERATIONS LIST
 
-#### OP_PUSH_INT (push value)
-Desc: 
-	Adding integer value to top of the stack
+	#### OP_PUSH_INT (push value)
+	Desc: 
+		Adding integer value to top of the stack
 
-Arguments:
+	Arguments:
 
-	Integer value
-Input: 
-	None
-Output: 
-	None
+		Integer value
+	Input: 
+		None
+	Output: 
+		None
 
-Example:
-	push 5
+	Example:
+		push 5
 
 
 #### OP_DROP (drop) 
