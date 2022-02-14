@@ -17,7 +17,7 @@
 		None
 - Error:
 
-		None
+		Throw TypeError if pushing value is not integer.
 Example:
 	
 	push 5
