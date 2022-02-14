@@ -3,7 +3,7 @@
 
 ## BASE OPERATIONS LIST
 
-### OP_PUSH_INT (push)
+#### OP_PUSH_INT (push)
 	
 ##### Desc: 
 	Adding integer value to top of the stack
