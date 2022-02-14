@@ -23,14 +23,14 @@
 	Example:
 	
 	push 5
----
 
----
+
+
 
 #### OP_DROP (drop) 
-	
-	Desc:
-		Removing integer value from top of the stack
+---
+
+	Removing integer value from top of the stack
 		
 	Arguments:
 		None
