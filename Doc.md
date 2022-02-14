@@ -33,7 +33,7 @@ Example:
 		None
 - Input: 
 	
-		None
+		Element from top of the stack.
 - Output: 
 	
 		None
