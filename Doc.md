@@ -25,13 +25,19 @@ Example:
 
 	Removing integer value from top of the stack
 		
-	Arguments:
+- Args:
+	
 		None
-		
-	Input:
+- Input: 
+	
 		None
-		
-	Output:
-		None
+- Output: 
+	
+		None		
+Example:
+	
+	pop
+---
+
 
 	  
