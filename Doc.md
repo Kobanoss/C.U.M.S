@@ -8,25 +8,17 @@
 - Desc: 
 	- Adding integer value to top of the stack
 			
--
-
-	Args:
-		Integer
+- Args:
+	- Integer
 		
---		
+- Input: 
+	- None
 		
-	Input: 
-		None
+- Output: 
+	- None
 		
----		
-		
-	Output: 
-		None
-		
----
-
-	Example:
-		push 5
+- Example:
+	- push 5
 
 
 #### OP_DROP (drop) 
