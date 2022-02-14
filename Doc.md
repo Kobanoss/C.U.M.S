@@ -9,19 +9,15 @@
 - Args:
 	
 		Integer
-		
 - Input: 
 	
 		None
-		
 - Output: 
 	
-		None
-		
+		None		
 Example:
 	
 	push 5
-
 
 
 ---
