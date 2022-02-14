@@ -3,6 +3,10 @@
 
 ## BASE OPERATIONS LIST
 
+---
+
+---
+
 #### OP_PUSH_INT (push)
 	
 	Adding integer value to top of the stack
@@ -25,6 +29,9 @@
 	
 	Example:
 		push 5
+---
+
+---
 
 #### OP_DROP (drop) 
 	
