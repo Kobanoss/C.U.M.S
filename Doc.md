@@ -5,17 +5,19 @@
 
 #### OP_PUSH_INT (push)
 	
-##### Desc: 
 	Adding integer value to top of the stack
 			
 - Args:
-	- Integer
+	
+		Integer
 		
 - Input: 
-	- None
+	
+		None
 		
 - Output: 
-	- None
+	
+		None
 		
 ##### Example:
 	push 5
