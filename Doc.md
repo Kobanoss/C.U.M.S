@@ -7,27 +7,31 @@
 	Desc: 
 		Adding integer value to top of the stack
 
-	Arguments:
-
-		Integer value
+	Args:
+		Integer
+		
 	Input: 
 		None
+		
 	Output: 
 		None
 
 	Example:
 		push 5
 
+---
 
-#### OP_DROP (drop) 
-Desc:
-	Removing integer value from top of the stack
-
-Arguments:
-	None
-Input:
-	None
-Output:
-	None
+	#### OP_DROP (drop) 
+	Desc:
+		Removing integer value from top of the stack
+		
+	Arguments:
+		None
+		
+	Input:
+		None
+		
+	Output:
+		None
 
 	  
