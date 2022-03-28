@@ -1,0 +1,45 @@
+100 0 while dup2 > :
+    dup mem + 0 mPush
+    1 + 
+end
+drop drop
+
+
+mem 1 + 1 mPush
+mem 98 + 1 mPush
+
+0 while dup 98 < :
+    0 while dup 100 < :
+        if dup mem + mLoad
+            : mem 100 + 64 mPush
+        else
+            : mem 100 + 32 mPush
+        end
+        1 1 mem 100 + 1 4 syscall
+
+        1 +
+    end
+    drop
+
+    mem 100 + 10 mPush
+    1 1 mem 100 + 1 4 syscall
+
+    mem     mLoad 1 >>
+    mem 1 + mLoad 
+    |
+
+    1 while dup 98 < :
+        swap 1 >> 7 &
+        over mem + 1 + mLoad |
+        2dup 110 swap << 1 &
+        swap mem + swap mPush
+        swap
+        
+        1 +
+    end
+
+    drop drop
+
+    1 +
+end
+drop

@@ -1,0 +1,45 @@
+0 while dup 1000 < :
+    dup mem + 0 mPush 
+    1 +
+end
+
+10 cDebug
+
+mem 998 + 1 mPush
+
+0 while dup 998 < :
+    0 while dup 1000 < :
+        
+        
+        if dup mem + mLoad
+            : mem 1000 + 42 mPush
+        else
+            : mem 1000 + 32 mPush
+        end
+        
+        mem 1000 + mLoad cDebug
+        
+        1 +
+    end drop
+
+    10 cDebug
+
+    mem     mLoad 1 <<
+    mem 1 + mLoad 
+    |
+
+
+    1 while dup 998 < :
+        swap 1 << 7 &
+        over mem + 1 + mLoad |
+        dup2 110 swap >> 1 &
+        swap mem + swap mPush
+        swap
+        
+        1 +
+    end
+    drop drop
+    
+    
+    1 +
+end drop    
