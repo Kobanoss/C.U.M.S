@@ -37,9 +37,9 @@ typedef struct position {
 } position;
 
 enum Operations {OP_PUSH_INT, OP_PUSH_CHAR, OP_PUSH_STR, OP_DROP, OP_DUP, OP_DUPM, OP_OVER, OP_OVERM, OP_SWAP, COMMENT, OP_PLUS, OP_MINUS, OP_MUL, OP_DIV,
-          OP_MOD, OP_DEBUG_INT, OP_DEBUG_CHAR, OP_MEM, OP_MEM_PUSH, OP_MEM_LOAD, OP_SYSCALL, OP_EQUAL,
-          OP_NOT_EQUAL, OP_GREATER, OP_LOWER, OP_IF, OP_DO, OP_ELSE, OP_END, OP_WHILE, OP_AND_BIT,
-          OP_OR_BIT, OP_BITSHIFT_LEFT, OP_BITSHIFT_RIGHT, OP_MACRO, OP_MACRO_END, OP_MACRO_SET_NAME, OP_MACRO_EXPAND, OP_INCLUDE, OP_COUNTER};
+    OP_MOD, OP_DEBUG_INT, OP_DEBUG_CHAR, OP_MEM, OP_MEM_PUSH, OP_MEM_LOAD, OP_SYSCALL, OP_EQUAL,
+    OP_NOT_EQUAL, OP_GREATER, OP_LOWER, OP_IF, OP_DO, OP_ELSE, OP_END, OP_WHILE, OP_AND_BIT,
+    OP_OR_BIT, OP_BITSHIFT_LEFT, OP_BITSHIFT_RIGHT, OP_MACRO, OP_MACRO_END, OP_MACRO_SET_NAME, OP_MACRO_EXPAND, OP_INCLUDE, OP_COUNTER};
 
 enum RunMode {RUN_DEBUG, RUN_TIMER_DEBUG ,RUN_RELEASE};
 
@@ -63,45 +63,45 @@ typedef struct file_token {
     Operations operation = {};
     std::vector<int64_t> args = {};
     std::vector<char> data = {};
-} 
-file_token;
+}
+        file_token;
 
 std::map<std::string, uint64_t> MACRO_MAP = {};
 
 std::map<std::string, Operations> KEYWORD_MAP = {
-    {"drop",OP_DROP},
-    {"dup", OP_DUP},
-    {"dupm",OP_DUPM},
-    {"over",OP_OVER},
-    {"overm", OP_OVERM},
-    {"swap",OP_SWAP},
-    {"+", OP_PLUS},
-    {"-", OP_MINUS},
-    {"*", OP_MUL},
-    {"//", OP_DIV},
-    {"%", OP_MOD},
-    {"iDebug", OP_DEBUG_INT},
-    {"cDebug", OP_DEBUG_CHAR},
-    {"mem", OP_MEM},
-    {"mPush", OP_MEM_PUSH},
-    {"mLoad", OP_MEM_LOAD},
-    {"syscall", OP_SYSCALL},
-    {"==", OP_EQUAL},
-    {"!=", OP_NOT_EQUAL},
-    {">", OP_GREATER},
-    {"<", OP_LOWER},
-    {"if", OP_IF},
-    {":", OP_DO},
-    {"else", OP_ELSE},
-    {"end", OP_END},
-    {"while", OP_WHILE},
-    {"<<", OP_BITSHIFT_LEFT},
-    {">>", OP_BITSHIFT_RIGHT},
-    {"&", OP_AND_BIT},
-    {"|", OP_OR_BIT},
-    {"macro", OP_MACRO},
-    {"macroEnd", OP_MACRO_END},
-    {"include", OP_INCLUDE}
+        {"drop",OP_DROP},
+        {"dup", OP_DUP},
+        {"dupm",OP_DUPM},
+        {"over",OP_OVER},
+        {"overm", OP_OVERM},
+        {"swap",OP_SWAP},
+        {"+", OP_PLUS},
+        {"-", OP_MINUS},
+        {"*", OP_MUL},
+        {"//", OP_DIV},
+        {"%", OP_MOD},
+        {"iDebug", OP_DEBUG_INT},
+        {"cDebug", OP_DEBUG_CHAR},
+        {"mem", OP_MEM},
+        {"mPush", OP_MEM_PUSH},
+        {"mLoad", OP_MEM_LOAD},
+        {"syscall", OP_SYSCALL},
+        {"==", OP_EQUAL},
+        {"!=", OP_NOT_EQUAL},
+        {">", OP_GREATER},
+        {"<", OP_LOWER},
+        {"if", OP_IF},
+        {":", OP_DO},
+        {"else", OP_ELSE},
+        {"end", OP_END},
+        {"while", OP_WHILE},
+        {"<<", OP_BITSHIFT_LEFT},
+        {">>", OP_BITSHIFT_RIGHT},
+        {"&", OP_AND_BIT},
+        {"|", OP_OR_BIT},
+        {"macro", OP_MACRO},
+        {"macroEnd", OP_MACRO_END},
+        {"include", OP_INCLUDE}
 };
 
 
@@ -123,7 +123,7 @@ void callUsageError(const std::string &error_msg) {
                  "    FILENAME      - filename.cums                             \n"
                  "                                                              \n"
                  "    RUN_MODE      - d (DEBUG)                                 \n"
-                 "                  - r (RELEASE)                               \n"                                                          
+                 "                  - r (RELEASE)                               \n"
                  "                                                              \n"
                  "    BUILD_MODE    - sim (simulation in C++)                   \n"
                  "                  - com (self compilation)                    \n";
@@ -155,7 +155,7 @@ std::vector<file_token> dataFromFile(const std::string &file_path) {
             int16_t is_string = 0;
             for (int col = 0; col < str.size(); col++) {
                 char char_ = str[col];
-                
+
                 if (char_ == '\"') {
                     is_string = 1 - is_string;
                     token += char_;
@@ -165,14 +165,14 @@ std::vector<file_token> dataFromFile(const std::string &file_path) {
                         file_data.push_back({{row, col - (int64_t)token.size() + 1}, token});
                     token = "";
                 }
-                
+
                 else if (col == str.size() - 1) {
                     token += char_;
                     file_data.push_back({{row, col - (int64_t)token.size() + 1}, token});
                 }
-                else 
+                else
                     token += char_;
-        
+
             }
             row++;
         }
@@ -206,7 +206,7 @@ uint16_t getTokenType(const std::string &token) {
 // LEXER BLOCK
 file_token lexToken(bool status_macro, file_token token, uint64_t index) {
     callImplementationError(39);
-    
+
     token.type = getTokenType(token.token);
 
     if (token.type == TYPE_KEYWORD) {
@@ -256,6 +256,7 @@ void cross_reference_blocks (std::vector<file_token> &program) {
     dStack cross_reference_macro_stack = dStack();
     dStack cross_reference_stack = dStack();
     dStack cross_reference_types_stack = dStack();
+    dStack cross_reference_while_stack = dStack();
 
     int64_t type, start_block_point, start_macro_point;
 
@@ -263,55 +264,55 @@ void cross_reference_blocks (std::vector<file_token> &program) {
         file_token token = program[i];
 
         switch (token.operation) {
-        
-        case OP_MACRO:
-            cross_reference_macro_stack.push(i + 1);
-            break;
 
-        case OP_MACRO_EXPAND:
-            program[i].args.push_back(MACRO_MAP[program[i].token]);
-            break;
-            
-        case OP_MACRO_END:
-            program[cross_reference_macro_stack.pop()].args.push_back(i);
-            break;
+            case OP_MACRO:
+                cross_reference_macro_stack.push(i + 1);
+                break;
 
-        case OP_IF:
-            cross_reference_types_stack.push(OP_IF);
-            break;
-        
-        case OP_DO:
-            cross_reference_stack.push(i);
-            break;
-        
-        case OP_ELSE:
-            cross_reference_types_stack.push(OP_ELSE);
-            program[cross_reference_stack.pop()].args.push_back(i-1);
-            cross_reference_stack.push(i);
-            break;
-        
-        case OP_WHILE:
-            cross_reference_types_stack.push(OP_WHILE);
-            break;
-        
-        case OP_END:
-            start_block_point = cross_reference_stack.pop();
-            type = cross_reference_types_stack.pop();
-                        
+            case OP_MACRO_EXPAND:
+                program[i].args.push_back(MACRO_MAP[program[i].token]);
+                break;
 
-            if (type == OP_WHILE) {
-                program[i].args.push_back(start_block_point-4);
-                program[start_block_point].args.push_back(i);
-            }
-            else
-                program[start_block_point].args.push_back(i-1);
-            // std::cout << "END: " << i << '\n';
+            case OP_MACRO_END:
+                program[cross_reference_macro_stack.pop()].args.push_back(i);
+                break;
 
-            if (type == OP_ELSE) {
+            case OP_IF:
+                cross_reference_types_stack.push(OP_IF);
+                break;
+
+            case OP_DO:
+                cross_reference_stack.push(i);
+                break;
+
+            case OP_ELSE:
+                cross_reference_types_stack.push(OP_ELSE);
+                program[cross_reference_stack.pop()].args.push_back(i-1);
+                cross_reference_stack.push(i);
+                break;
+
+            case OP_WHILE:
+                cross_reference_types_stack.push(OP_WHILE);
+                cross_reference_while_stack.push(i);
+                break;
+
+            case OP_END:
                 start_block_point = cross_reference_stack.pop();
                 type = cross_reference_types_stack.pop();
-            }
-            break;
+
+
+                if (type == OP_WHILE) {
+                    program[i].args.push_back(cross_reference_while_stack.pop());
+                    program[start_block_point].args.push_back(i);
+                }
+                else
+                    program[start_block_point].args.push_back(i-1);
+
+                if (type == OP_ELSE) {
+                    start_block_point = cross_reference_stack.pop();
+                    type = cross_reference_types_stack.pop();
+                }
+                break;
         }
     }
 
@@ -341,21 +342,21 @@ std::vector<file_token> lexFile(const std::vector<file_token>& old_program, bool
             auto include_target = old_program[i - 1].token;
             std::erase(include_target, '\"');
             if (!checkFileType(include_target)) {
-                std::cerr   << token.pos.row << "(" << token.pos.row + 1 << ") : " 
-                            << token.pos.col << "(" << token.pos.col + 1 << ") : " 
+                std::cerr   << token.pos.row << "(" << token.pos.row + 1 << ") : "
+                            << token.pos.col << "(" << token.pos.col + 1 << ") : "
                             << token.token + " " + include_target << " : " << "WRONG INCLUDE" << std::endl;
                 exit(EXIT_FAILURE);
             }
             std::vector<file_token> include_data = lexFile(dataFromFile(include_target), true, i + 1);
             offset = include_data.size();
-            for (uint64_t j = 0; j < include_data.size(); j++) {
-                program.push_back(include_data[j]);
+            for (auto & j : include_data) {
+                program.push_back(j);
             }
 
-        
+
         }
     }
-    if (include == false) {
+    if (!include) {
         cross_reference_blocks(program);
     }
 
@@ -385,10 +386,9 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
         for (uint64_t i = 0; i < program.size(); i++) {
             std::cout << i << " : " << program[i].token << " : " << program[i].operation;
             auto op = program[i].operation;
-            if (op == OP_PUSH_CHAR  || op == OP_PUSH_INT 
-                                    || op == OP_MACRO_SET_NAME 
-                                    || op ==  OP_MACRO_EXPAND 
-                                    || op ==  OP_DO) {
+            if (op == OP_PUSH_CHAR  || op == OP_PUSH_INT
+                || op == OP_MACRO_SET_NAME
+                || op ==  OP_MACRO_EXPAND) {
                 std::cout << " : " << program[i].args[0];
             }
             std::cout << std::endl;
@@ -399,14 +399,14 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
         file_token token = program[i];
         clock_t loop_start_point = 0;
         switch (run_mode) {
-        case RUN_DEBUG:
-            usleep(100000);
-            std::cout << token.token << std::endl;
-            break;
-        case RUN_TIMER_DEBUG:
-            std::cout << token.token << std::endl;
-            loop_start_point = clock();
-            break;
+            case RUN_DEBUG:
+                usleep(100000);
+                std::cout << token.token << std::endl;
+                break;
+            case RUN_TIMER_DEBUG:
+                std::cout << token.token << std::endl;
+                loop_start_point = clock();
+                break;
         }
 
 
@@ -416,21 +416,21 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
 
         switch (token.operation) {
 
-            
+
             case OP_PUSH_INT:
                 stack.push(token.args[0]);
                 break;
-            
+
             case OP_PUSH_CHAR:
                 stack.push(token.args[0]);
                 break;
 
             case OP_PUSH_STR:
-                for (int64_t i = 0; i < token.data.size(); i++)
-                    ptr_data[i + data_start_point] = token.data[i];
-                
+                for (int64_t j = 0; j < token.data.size(); j++)
+                    ptr_data[j + data_start_point] = token.data[j];
+
                 stack.push(((int64_t) ptr_data) + data_start_point);
-                
+
                 data_start_point += token.data.size();
                 ptr_data[data_start_point] = '\0';
                 data_start_point += 1;
@@ -446,18 +446,18 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
 
             case OP_DUPM:
                 len = stack.pop();
-                for (int64_t i = 0; i < len; i++) {
+                for (int64_t j = 0; j < len; j++) {
                     tmp_vec.push_back(stack.pop());
                 }
-                for (int64_t i = 0; i < tmp_vec.size(); i++) {
-                    stack.push(tmp_vec[tmp_vec.size() - i - 1]);
+                for (int64_t j = 0; j < tmp_vec.size(); j++) {
+                    stack.push(tmp_vec[tmp_vec.size() - j - 1]);
                 }
-                for (int64_t i = 0; i < tmp_vec.size(); i++) {
-                    stack.push(tmp_vec[tmp_vec.size() - i - 1]);
+                for (int64_t j = 0; j < tmp_vec.size(); j++) {
+                    stack.push(tmp_vec[tmp_vec.size() - j - 1]);
                 }
                 tmp_vec.erase(tmp_vec.begin(), tmp_vec.end());
                 break;
-            
+
             case OP_OVER:
                 a = stack.pop();
                 b = stack.pop();
@@ -468,12 +468,12 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
             case OP_OVERM:
                 len = stack.pop();
 
-                for (int64_t i = 0; i < len + 1; i++) {
+                for (int64_t j = 0; j < len + 1; j++) {
                     a = stack.pop();
                     tmp_vec.push_back(a);
                 }
-                for (int64_t i = 0; i < tmp_vec.size(); i++) {
-                    a = tmp_vec[tmp_vec.size() - 1 - i];
+                for (int64_t j = 0; j < tmp_vec.size(); j++) {
+                    a = tmp_vec[tmp_vec.size() - 1 - j];
                     stack.push(a);
                 }
                 stack.push(tmp_vec[tmp_vec.size() - 1]);
@@ -486,130 +486,130 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
                 stack.push(a);
                 stack.push(b);
                 break;
-            
+
             case OP_PLUS:
                 a = stack.pop();
                 b = stack.pop();
-                stack.push(b + a);   
+                stack.push(b + a);
                 break;
-            
+
             case OP_MINUS:
                 a = stack.pop();
                 b = stack.pop();
                 stack.push(b - a);
                 break;
-            
+
             case OP_MUL:
                 a = stack.pop();
                 b = stack.pop();
                 stack.push(b * a);
                 break;
-            
+
             case OP_DIV:
                 a = stack.pop();
-                b = stack.pop();            
+                b = stack.pop();
                 stack.push(b / a);
                 break;
-            
+
             case OP_MOD:
                 a = stack.pop();
-                b = stack.pop();            
+                b = stack.pop();
                 stack.push(b % a);
                 break;
-            
+
             case OP_DEBUG_INT:
                 std::cout << (int64_t) stack.pop();
                 break;
-            
+
             case OP_DEBUG_CHAR:
-                std::cout << (char) stack.pop();    
+                std::cout << (char) stack.pop();
                 break;
-            
+
             case OP_MEM:
                 stack.push((int64_t) ptr_mem);
                 break;
-            
+
             case OP_MEM_PUSH:
                 push_value = stack.pop();
-                push_address = (int64_t)stack.pop(); 
-                *(char*)(push_address) = push_value;
+                push_address = (int64_t)stack.pop();
+                *(char*)(push_address) = (char)push_value;
                 break;
-            
+
             case OP_MEM_LOAD:
                 load_address = stack.pop();
                 stack.push((int64_t)*(char*)load_address);
                 break;
-            
+
             case OP_SYSCALL:
                 len = stack.pop();
 
 
-                for (int8_t j = 0; j < len; j++)
+                for (int64_t j = 0; j < len; j++)
                     ops[len-j-1] = stack.pop();
 
-                    syscall_all(ops, len);
-                    
+                syscall_all(ops, len);
+
                 break;
-            
+
             case OP_EQUAL:
                 a = stack.pop();
-                b = stack.pop(); 
+                b = stack.pop();
                 stack.push(b == a ? 1 : 0);
-                break; 
-            
+                break;
+
             case OP_NOT_EQUAL:
                 a = stack.pop();
-                b = stack.pop(); 
+                b = stack.pop();
                 stack.push(b != a ? 1 : 0);
-                break; 
-            
+                break;
+
             case OP_GREATER:
                 a = stack.pop();
-                b = stack.pop(); 
+                b = stack.pop();
                 stack.push(b > a ? 1: 0);
-                break; 
-            
+                break;
+
             case OP_LOWER:
                 a = stack.pop();
-                b = stack.pop(); 
+                b = stack.pop();
                 stack.push(b < a ? 1: 0);
-                break; 
-            
+                break;
+
             case OP_IF:
-                break; 
-            
+                break;
+
             case OP_DO:
                 statement = stack.pop();
-                next_statement = 1 - statement;    
+                next_statement = 1 - statement;
                 switch (statement) {
-                case 0:
-                    i = token.args[0];
-                    break;
-                case 1: 
-                    break;
-                
-                default:
-                    std::cerr << token.pos.row << "(" << token.pos.row + 1 << ") : " << token.pos.col << "(" << token.pos.col + 1 << ") : " << token.token << " : "
-                        << "BAD STATEMENT" << std::endl;
-                    free(ptr_mem);
-                    free(ptr_data);
-                    stack.~dStack();
-                    exit(EXIT_FAILURE);
-                    break;
+                    case 0:
+                        i = token.args[0];
+                        break;
+                    case 1:
+                        break;
+
+                    default:
+                        std::cerr << token.pos.row << "(" << token.pos.row + 1 << ") : " << token.pos.col << "(" << token.pos.col + 1 << ") : " << token.token << " : "
+                                  << "BAD STATEMENT" << std::endl;
+                        free(ptr_mem);
+                        free(ptr_data);
+                        stack.~dStack();
+                        exit(EXIT_FAILURE);
+                        break;
                 }
-                break; 
-            
+                break;
+
             case OP_ELSE:
-                stack.push(next_statement); 
-                break; 
-            
+                stack.push(next_statement);
+                break;
+
             case OP_WHILE:
-                break; 
-            
+                break;
+
             case OP_END:
                 if (token.args.size() != 0)
                     i = token.args[0];
-                break; 
+                break;
 
             case OP_BITSHIFT_LEFT:
                 a = stack.pop();
@@ -637,21 +637,21 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
 
             case OP_MACRO:
                 break;
-            
+
             case OP_MACRO_END:
                 if (macro_status.back()) {
-                    macro_status.pop_back(); 
+                    macro_status.pop_back();
                     i = macro_point.back();
                     macro_point.pop_back();
                 }
                 break;
-            
+
             case OP_MACRO_SET_NAME:
                 i = token.args[0];
                 break;
-            
+
             case OP_MACRO_EXPAND:
-                macro_point.push_back(i);    
+                macro_point.push_back(i);
                 i = token.args[0];
                 macro_status.push_back(true);
                 break;
@@ -662,14 +662,14 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
 
             default:
                 std::cerr << token.pos.row << "(" << token.pos.row + 1 << ") : " << token.pos.col << "(" << token.pos.col + 1 << ") : " << token.token << " : "
-                << "UNKNOWN OPERATOR AFTER LEX" << std::endl;
+                          << "UNKNOWN OPERATOR AFTER LEX" << std::endl;
                 free(ptr_mem);
                 free(ptr_data);
                 stack.~dStack();
                 exit(EXIT_FAILURE);
                 break;
-        }   
-        if (run_mode == RUN_TIMER_DEBUG)        
+        }
+        if (run_mode == RUN_TIMER_DEBUG)
             printf("Simulation operator time: %ld ns\n", (clock() - loop_start_point) / (CLOCKS_PER_SEC/1000000));
     }
 
@@ -715,9 +715,8 @@ int main(const int32_t argc, const char **argv) {
         return_code = compilation(program, run_mode);
     else
         callUsageError("BUILD_MODE ERROR!");
-    
-    
+
+
 
     return return_code;
 }
-
