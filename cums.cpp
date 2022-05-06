@@ -217,8 +217,8 @@ file_token lexToken(bool status_macro, file_token token, uint64_t index) {
         token.args.push_back(std::stoi(token.token));
     }
     else if (token.type == TYPE_CHAR) {
-        token.operation == OP_PUSH_CHAR;
-        token.args.push_back((int64_t)(token.token.c_str()));
+        token.operation = OP_PUSH_CHAR;
+        token.args.push_back((int64_t)(token.token.c_str()[1]));
     }
     else if (token.type == TYPE_STRING) {
         token.operation = OP_PUSH_STR;
