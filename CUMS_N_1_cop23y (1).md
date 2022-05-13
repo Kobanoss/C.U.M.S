@@ -291,11 +291,11 @@ Example:
 
 		5 4 3
 
-		// Remove 5 from top of the stack
+		// Remove 3 from top of the stack
 
 		drop
 
-		// On stack -> 4 3 	
+		// On stack -> 5 4 	
 
 ---
 
