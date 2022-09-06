@@ -7,10 +7,10 @@ Done:
 - Basic error processing
 
 # Compile guide:
-    '''g++ -std=c++2a ./cums.cpp -o ./cums'''
+    g++ -std=c++2a ./cums.cpp -o ./cums
 
 # Minimal program:
-    '''0 iDebug'''
+    0 iDebug
     
 # Simulation run:
-    '''./cums $FILENAME r sim'''
+    ./cums $FILENAME r sim
