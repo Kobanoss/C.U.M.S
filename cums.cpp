@@ -37,13 +37,13 @@ typedef struct position {
 } position;
 
 enum Operations {OP_PUSH_INT, OP_PUSH_CHAR, OP_PUSH_STR, OP_DROP, OP_DUP, OP_DUPM, OP_OVER, OP_OVERM, OP_SWAP, COMMENT, OP_PLUS, OP_MINUS, OP_MUL, OP_DIV,
-    OP_MOD, OP_DEBUG_INT, OP_DEBUG_CHAR, OP_MEM, OP_MEM_PUSH, OP_MEM_LOAD, OP_SYSCALL, OP_EQUAL,
+    OP_MOD, OP_DEBUG_INT, OP_DEBUG_CHAR, OP_MEM, OP_MEM64, OP_MEM_PUSH, OP_MEM64_PUSH, OP_MEM_LOAD, OP_MEM64_LOAD, OP_SYSCALL, OP_EQUAL,
     OP_NOT_EQUAL, OP_GREATER, OP_LOWER, OP_IF, OP_DO, OP_ELSE, OP_END, OP_WHILE, OP_AND_BIT,
     OP_OR_BIT, OP_BITSHIFT_LEFT, OP_BITSHIFT_RIGHT, OP_MACRO, OP_MACRO_END, OP_MACRO_SET_NAME, OP_MACRO_EXPAND, OP_INCLUDE, OP_COUNTER};
 
 enum RunMode {RUN_DEBUG, RUN_TIMER_DEBUG ,RUN_RELEASE};
 
-// [stack, 0x12345578] [int64_t , ...] [char, ...]
+// [stack, 0x12345578], [char(contollable heap) , ...], [char(uncontollable data), ...], [int64_t(contollable heap)]
 
 auto TYPE_KEYWORD = iota(true);
 auto TYPE_INTEGER = iota();
@@ -83,8 +83,11 @@ std::map<std::string, Operations> KEYWORD_MAP = {
         {"iDebug", OP_DEBUG_INT},
         {"cDebug", OP_DEBUG_CHAR},
         {"mem", OP_MEM},
+        {"mem64", OP_MEM64},
         {"mPush", OP_MEM_PUSH},
+        {"m64Push", OP_MEM64_PUSH},
         {"mLoad", OP_MEM_LOAD},
+        {"m64Load", OP_MEM64_LOAD},
         {"syscall", OP_SYSCALL},
         {"==", OP_EQUAL},
         {"!=", OP_NOT_EQUAL},
@@ -205,7 +208,7 @@ uint16_t getTokenType(const std::string &token) {
 
 // LEXER BLOCK
 file_token lexToken(bool status_macro, file_token token, uint64_t index) {
-    callImplementationError(39);
+    callImplementationError(42);
 
     token.type = getTokenType(token.token);
 
@@ -248,7 +251,7 @@ file_token lexToken(bool status_macro, file_token token, uint64_t index) {
 // BLOCKS CROSS-REFERENCE BLOCK
 
 void cross_reference_blocks (std::vector<file_token> &program) {
-    callImplementationError(39);
+    callImplementationError(42);
     // NOT ALL OPERATIONS NEED TO BE IMPLEMENTED HERE.
     // ONLY OPERATIONS WHICH MODIFY CODE BLOCKS
 
@@ -323,7 +326,7 @@ void cross_reference_blocks (std::vector<file_token> &program) {
 }
 
 std::vector<file_token> lexFile(const std::vector<file_token>& old_program, bool include = false, uint64_t include_offset = 0) {
-    callImplementationError(39);
+    callImplementationError(42);
 
     std::vector<file_token> program;
     bool macro_status = false;
@@ -369,12 +372,13 @@ std::vector<file_token> lexFile(const std::vector<file_token>& old_program, bool
 
 // SIMULATION BLOCK
 uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
-    callImplementationError(39);
+    callImplementationError(42);
 
     clock_t start_point = clock();
 
     char *ptr_mem = (char *) malloc(sizeof(char) * MEM_LIMIT);
     char *ptr_data = (char *) malloc(sizeof(char) * MEM_LIMIT);
+    int64_t* ptr_mem64 = (int64_t *) malloc(sizeof(int64_t) * MEM_LIMIT);
     int64_t data_start_point = 0;
 
     dStack stack;
@@ -518,15 +522,19 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
                 break;
 
             case OP_DEBUG_INT:
-                std::cout << (int64_t) stack.pop();
+                std::cout << (int64_t) stack.pop() << std::flush;
                 break;
 
             case OP_DEBUG_CHAR:
-                std::cout << (char) stack.pop();
+                std::cout << (char) stack.pop() << std::flush;
                 break;
 
             case OP_MEM:
                 stack.push((int64_t) ptr_mem);
+                break;
+            
+            case OP_MEM64:
+                stack.push((int64_t) ptr_mem64);
                 break;
 
             case OP_MEM_PUSH:
@@ -535,9 +543,20 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
                 *(char*)(push_address) = (char)push_value;
                 break;
 
+            case OP_MEM64_PUSH:
+                push_value = stack.pop();
+                push_address = (int64_t)stack.pop();
+                *(int64_t*)(push_address) = (int64_t)push_value;
+                break;
+
             case OP_MEM_LOAD:
                 load_address = stack.pop();
                 stack.push((int64_t)*(char*)load_address);
+                break;
+            
+            case OP_MEM64_LOAD:
+                load_address = stack.pop();
+                stack.push((int64_t)*(int64_t*)load_address);
                 break;
 
             case OP_SYSCALL:
@@ -675,6 +694,7 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
 
     free(ptr_mem);
     free(ptr_data);
+    free(ptr_mem64);
     stack.~dStack();
     printf("Simulation time: %ld ns\n", (clock() - start_point) / (CLOCKS_PER_SEC/1000000));
     return 0;
@@ -682,7 +702,7 @@ uint8_t simulation(std::vector<file_token> &program, RunMode run_mode) {
 
 
 uint8_t compilation(const std::vector<file_token> &program, uint16_t run_mode) {
-    callImplementationError(32);
+    callImplementationError(42);
     std::cerr << ">> COMPILATION NOT IMPLEMENTED YET" << std::endl;
     exit(EXIT_FAILURE);
     return 0;
